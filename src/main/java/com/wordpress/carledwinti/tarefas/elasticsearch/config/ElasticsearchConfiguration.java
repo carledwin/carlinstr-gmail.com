@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.io.File;
 import java.io.IOException;
 
 @Configuration
+@EnableJpaRepositories(basePackages = "com.wordpress.carledwinti.tarefas.elasticsearch.jparepository")
 @EnableElasticsearchRepositories(basePackages = "com.wordpress.carledwinti.tarefas.elasticsearch.repository")
 public class ElasticsearchConfiguration {
 

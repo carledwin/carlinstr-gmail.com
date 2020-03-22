@@ -2,11 +2,18 @@ package com.wordpress.carledwinti.tarefas.elasticsearch.model;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 @Document(indexName = "tarefas", type = "tarefas", shards = 1)
 public class Tarefas {
 
     private String descricao;
     private String status;
+    @Id
+    @GeneratedValue
     private Long id;
     private Long duracao;
     private String observacao;

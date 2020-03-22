@@ -1,6 +1,7 @@
 package com.wordpress.carledwinti.tarefas.elasticsearch.load;
 
 import com.wordpress.carledwinti.tarefas.elasticsearch.model.Tarefas;
+import com.wordpress.carledwinti.tarefas.elasticsearch.jparepository.TarefasJpaRepository;
 import com.wordpress.carledwinti.tarefas.elasticsearch.repository.TarefasRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,9 @@ public class Loaders {
     @Autowired
     private TarefasRepository tarefasRepository;
 
+    @Autowired
+    private TarefasJpaRepository tarefasJpaRepository;
+
     @PostConstruct
     @Transactional
     public  void loadAll(){
@@ -32,7 +36,14 @@ public class Loaders {
 
         elasticsearchOperations.putMapping(Tarefas.class);
 
-        tarefasRepository.save(getData());
+        List<Tarefas> data = getData();
+
+        tarefasJpaRepository.save(data); //H2
+
+        final List<Tarefas> tarefas = tarefasJpaRepository.findAll();
+
+        tarefasRepository.save(tarefas); //load Elastic
+
         logger.info("Dados carregados com sucesso!");
     }
 
