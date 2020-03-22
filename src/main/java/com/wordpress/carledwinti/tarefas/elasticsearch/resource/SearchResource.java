@@ -2,12 +2,15 @@ package com.wordpress.carledwinti.tarefas.elasticsearch.resource;
 
 import com.wordpress.carledwinti.tarefas.elasticsearch.model.Tarefas;
 import com.wordpress.carledwinti.tarefas.elasticsearch.repository.TarefasRepository;
+import org.elasticsearch.index.IndexNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,9 @@ public class SearchResource {
 
     @Autowired
     TarefasRepository tarefasRepository;
+
+    @Autowired
+    ElasticsearchTemplate elasticsearchTemplate;
 
     @GetMapping("/search/descricao/{text}")
     public List<Tarefas> searchDescricao(@PathVariable final String text) {
@@ -39,8 +45,14 @@ public class SearchResource {
         List<Tarefas> tarefas = new ArrayList<>();
 
         Iterable<Tarefas> tarefasI = tarefasRepository.findAll();
-        tarefasI.forEach(tarefas::add);
 
+        tarefasI.forEach(tarefas::add);
         return tarefas;
+    }
+
+    @GetMapping("/delete-all/{index}")
+    public boolean deleteAll(@PathVariable final String index) {
+
+        return elasticsearchTemplate.deleteIndex(index);
     }
 }
