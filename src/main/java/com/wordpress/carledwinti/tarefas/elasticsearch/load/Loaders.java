@@ -40,11 +40,11 @@ public class Loaders {
 
         List<Tarefas> tarefas = new ArrayList<>();
 
-        tarefas.add(new Tarefas("Ligar para o eletricista", "P", 231L, 20L, "Alameno Lacale"));
-        tarefas.add(new Tarefas("Abastecer o carro", "P", 257L, 50L, "Teleco Maneco"));
-        tarefas.add(new Tarefas("Ligar para a loja", "P", 234L, 20L, "Bambabe Cameli"));
-        tarefas.add(new Tarefas("Enviar email para Zamcana", "F", 273L, 10L, "Pape Tareco"));
-        tarefas.add(new Tarefas("Fazer revisão para viagem", "P", 287L, 70L, "Alameno Lacale"));
+        tarefas.add(new Tarefas("Ligar para o eletricista", "P", 231L, 20L, "-", "Alameno Lacale"));
+        tarefas.add(new Tarefas("Abastecer o carro", "P", 257L, 50L, "Depende da agenda", "Teleco Maneco"));
+        tarefas.add(new Tarefas("Ligar para a loja", "P", 234L, 20L, "Depende da agenda","Bambabe Cameli"));
+        tarefas.add(new Tarefas("Enviar email para Zamcana", "F", 273L, 10L, "Urgente", "Pape Tareco"));
+        tarefas.add(new Tarefas("Fazer revisão para viagem", "P", 287L, 70L, "-", "Alameno Lacale"));
 
         return tarefas;
     }
